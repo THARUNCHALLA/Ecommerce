@@ -15,7 +15,7 @@ const data = [
     title: "Air Max Zoom",
     reviews: "(84 reviews)",
     prevPrice: "$170.00",
-    newPrice: "200",
+    newPrice: "150",
     company: "Adidas",
     color: "white",
     category: "sandals"
@@ -59,7 +59,7 @@ const data = [
     title: "Women Heels",
     reviews: "(204 reviews)",
     prevPrice: "$141.00",
-    newPrice: "200",
+    newPrice: "100",
     company: "Puma",
     color: "white",
     category: "heels"
@@ -1169,7 +1169,7 @@ const data = [
     title: "Classic Flex",
     reviews: "(180 reviews)",
     prevPrice: "$165.00",
-    newPrice: "140",
+    newPrice: "120",
     company: "Vans",
     color: "white",
     category: "flats"
