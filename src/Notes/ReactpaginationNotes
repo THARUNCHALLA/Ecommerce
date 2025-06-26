@@ -1,0 +1,7 @@
+Reactpagination Notes :
+forcePage={currentPage}: Ensures the UI stays in sync with your state.
+onPageChange: Updates currentPage when a user clicks.
+pageCount: Tells the component how many pages to render.
+pageRangeDisplayed & marginPagesDisplayed: Control the number of visible pagination buttons.
+breakLabel: Adds a "..." for skipped pages.
+previousClassName / nextClassName: Allow disabling navigation arrows when at bounds.
