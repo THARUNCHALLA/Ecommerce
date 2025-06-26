@@ -1,11 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setPrice } from "../../Store"
+import { useSearchParams } from "react-router-dom";
+
 
 const Price = () => {
   const dispatch = useDispatch()
   const selected = useSelector(state => state.search.Price)
+  const [searchParams, setSearchParams] = useSearchParams()
   const handleChange = (e) => {
-    dispatch(setPrice(e.target.value));
+    const value = e.target.value
+    dispatch(setPrice(value));
+    const UpdatedParams = new URLSearchParams(searchParams)
+    if(value==="All" || value===""){
+      UpdatedParams.delete("price")
+    }
+    else{
+      UpdatedParams.set("price", value);
+    }
+    setSearchParams(UpdatedParams)
   };
 
   return (

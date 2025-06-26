@@ -14,26 +14,15 @@ const ProductCard = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(0);
   const filteredData = useSelector(selectFilteredProducts);
-
-  // Calculate total number of pages based on filtered data
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
-
-  // Handler for page click event from ReactPaginate
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  // Reset to first page whenever filteredData changes
   useEffect(() => {
-    console.log("filteredData changed, resetting page to 0");
     setCurrentPage(0);
   }, [filteredData]);
-
-  // Calculate which items to display on the current page
   const offset = currentPage * itemsPerPage;
   const currentItems = filteredData.slice(offset, offset + itemsPerPage);
-
-  // Initial load: dispatch the full product list to Redux store
   useEffect(() => {
     dispatch(setProducts(data));
   }, [dispatch]);
@@ -72,7 +61,8 @@ const ProductCard = () => {
         </div>
       )}
       {/* Pagination controls */}
-      <ReactPaginate
+     {pageCount > 0 && (
+        <ReactPaginate
         breakLabel="..."                             // Label for ellipsis between page numbers
         nextLabel="Nxt"                              // Label for next-page button
         previousLabel="Prev"                         // Label for previous-page button
@@ -92,6 +82,8 @@ const ProductCard = () => {
         activeClassName="text-white bg-[#2874f0]"     // Styling for the currently active page
         forcePage={currentPage}                       // Control the current page externally
       />
+     )
+    }
     </div>
   );
 };

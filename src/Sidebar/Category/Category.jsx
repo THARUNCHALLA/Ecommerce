@@ -1,9 +1,22 @@
 import { setCategory } from "../../Store"
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useSearchParams } from "react-router-dom";
 const Category = () => {
   const dispatch = useDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
   const selected = useSelector(state => state.search.Category)
+  const handleChange = (e) => {
+    const value = e.target.value;
+    dispatch(setCategory(value))
+    const updatedParams = new URLSearchParams(searchParams);
+    if (value === "All" || value === "") {
+      updatedParams.delete("category");
+    } else {
+      updatedParams.set("category", value);
+    }
+    console.log(updatedParams.toString());//To See Your Output as a Query String
+    setSearchParams(updatedParams)
+  }
   return (
     <div>
       <p className="yrsa-Font text-2xl mb-2 font-semibold">Category</p>
@@ -15,7 +28,7 @@ const Category = () => {
             name="category"
             value={opt}
             checked={selected === opt}
-            onChange={() => dispatch(setCategory(opt))}
+            onChange={handleChange}
             className="w-4 h-4 text-blue-600"
           />
           <label

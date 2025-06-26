@@ -1,4 +1,5 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
+
 const initialState = {
     products: [],
     searchingValue: '',
@@ -19,20 +20,20 @@ const searchSlice = createSlice({
             state.searchingValue = action.payload;
         },
         setCategory(state, action) {
-            state.Category = action.payload
+            state.Category = action.payload;
         },
         setColor(state, action) {
-            state.Color = action.payload
+            state.Color = action.payload;
         },
         setPrice(state, action) {
-            state.Price = action.payload
+            state.Price = action.payload;
         },
         setClear(state) {
-            state.searchingValue = '',
-                state.Category = '',
-                state.Color = '',
-                state.Price = '',
-                state.Apply = ''
+            state.searchingValue = '';
+            state.Category = '';
+            state.Color = '';
+            state.Price = '';
+            state.Apply = '';
         },
         setApply(state) {
             state.Apply = {
@@ -45,12 +46,18 @@ const searchSlice = createSlice({
     },
 });
 
-
 export const store = configureStore({
     reducer: {
         search: searchSlice.reducer,
     },
 });
 
-
-export const { setSearchingValue, setCategory, setProducts, setColor, setPrice, setClear, setApply } = searchSlice.actions;
+export const {
+    setSearchingValue,
+    setCategory,
+    setProducts,
+    setColor,
+    setPrice,
+    setClear,
+    setApply
+} = searchSlice.actions;
