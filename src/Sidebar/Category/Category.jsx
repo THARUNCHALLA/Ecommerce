@@ -8,14 +8,6 @@ const Category = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     dispatch(setCategory(value))
-    const updatedParams = new URLSearchParams(searchParams);
-    if (value === "All" || value === "") {
-      updatedParams.delete("category");
-    } else {
-      updatedParams.set("category", value);
-    }
-    console.log(updatedParams.toString());//To See Your Output as a Query String
-    setSearchParams(updatedParams)
   }
   return (
     <div>

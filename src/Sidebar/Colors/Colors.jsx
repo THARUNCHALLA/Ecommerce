@@ -1,23 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setColor } from "../../Store";
 import { useSearchParams } from "react-router-dom";
-
+import { useEffect } from "react";
+import _ from "lodash"
 const Colors = () => {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.search.Color);
+  const Data = useSelector((state) => state.search.Apply);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const handleChange = (e) => {
     const value = e.target.value;
     dispatch(setColor(value));
-    const updatedParams = new URLSearchParams(searchParams);
-    if (value === "All" || value === "") {
-      updatedParams.delete("color");
-    } else {
-      updatedParams.set("color", value);
-    }
-    setSearchParams(updatedParams);
   };
+
 
   return (
     <div>
