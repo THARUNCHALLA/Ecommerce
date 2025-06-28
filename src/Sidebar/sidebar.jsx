@@ -1,38 +1,47 @@
 import Category from "./Category/Category";
 import Price from "./Price/Price";
 import Colors from "./Colors/Colors";
-import { setClear, setApply } from "../Store"
+import { setClear, setApply, setCategory, setColor, setPrice } from "../Store"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+
 import _ from "lodash"
 const Sidebar = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const Data = useSelector((state) => state.search.Apply);
+    const colorData = useSelector((state) => state.search.Color);
+    const categoryData = useSelector((state) => state.search.Category);
+    const priceData = useSelector((state) => state.search.Price);
     const dispatch = useDispatch()
     const Clear = () => {
         dispatch(setClear())
     }
     const Apply = () => {
-        dispatch(setApply())
+        console.log(colorData, categoryData, priceData, "aa")
+        const Filter = { price: priceData, category: categoryData, color: colorData }
+        dispatch(setApply(Filter))
     }
+
+    useEffect(() => {
+        const params = Object.fromEntries(searchParams);
+        if (params.color) dispatch(setColor(params.color));
+        if (params.category) dispatch(setCategory(params.category));
+        if (params.price) dispatch(setPrice(params.price));
+        dispatch(setApply(params));
+    }, []);
 
 
     useEffect(() => {
-        setSearchParams((prev) => {
-            let p = new URLSearchParams(prev)
-            const color = _.get(Data, "color", "");
-            const price = _.get(Data, "price", "");
-            const category = _.get(Data, "category", "")
-            if (color && color !== "All") p.set("color", color);
-            else p.delete("color")
-            if (price && price !== "All") p.set("price", color);
-            else p.delete("price")
-            if (category && category !== "All") p.set("category", color);
-            else p.delete("category")
-            return p
-        })
-    }, [Data, setSearchParams]);
+        const p = new URLSearchParams();
+        const color = _.get(Data, "color", "");
+        const price = _.get(Data, "price", "");
+        const category = _.get(Data, "category", "")
+        if (color && color !== "All") p.set("color", color);
+        if (category && category !== "All") p.set("category", category);
+        if (price && price !== "All") p.set("price", price);
+        setSearchParams(p, { replace: true });
+    }, [Data]);
 
 
 

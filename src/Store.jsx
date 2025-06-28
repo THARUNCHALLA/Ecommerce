@@ -35,12 +35,13 @@ const searchSlice = createSlice({
             state.Price = '';
             state.Apply = '';
         },
-        setApply(state) {
+        setApply(state, action) {
+            console.log(action)
             state.Apply = {
-                price: state.Price,
-                category: state.Category,
-                color: state.Color,
-                search: state.searchingValue
+                price: action.payload.price,
+                category: action.payload.category,
+                color: action.payload.color,
+                Search: state.searchingValue
             };
         }
     },
